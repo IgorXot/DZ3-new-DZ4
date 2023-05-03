@@ -2,11 +2,20 @@ package Units;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
+
 
 public abstract class Hero implements GameInterface, Comparable<Hero>{
+    public int[] getCoords() {
+        int[] coord = new int[] {coordinates.x, coordinates.y};
+        return coord;
+    }
+
+    public int getHp() {
+        return health;
+    }
+
     enum State {
-        ready, busy
+        ready, busy, die
     }
 
     protected int initiative;
@@ -14,7 +23,7 @@ public abstract class Hero implements GameInterface, Comparable<Hero>{
     protected int health;
     protected int maxHealth;
     protected int[] damage;
-    protected int armor; // броня
+    protected int armor; 
 
     protected ArrayList<Hero> team;
     protected Coordinates coordinates;
@@ -31,15 +40,14 @@ public abstract class Hero implements GameInterface, Comparable<Hero>{
         this.name = name;
         this.health = health;
         this.maxHealth = health;
-        //if (new Random().nextBoolean()) this.health-=9; //задать изначальное повреждение герою
         this.damage = damage;
         this.armor = armor;
         this.state = State.ready;
     }
 
     public String getInfo() {
-       return String.format("Name: %s  Health: %d  Type: %s Damage: %s Armor %d Init %d" ,
-                this.name, this.health, this.getClass().getSimpleName(),
+       return String.format("N: %s  %s Hp: %d Dam: %s Ar %d In %d" ,
+                this.name, this.getClass().getSimpleName(), this.health,
                Arrays.toString(this.damage), this.armor, this.initiative);
 
     }
@@ -49,11 +57,13 @@ public abstract class Hero implements GameInterface, Comparable<Hero>{
     }
 
     protected void getDamage(int doneDamage) {
-            //doneDamage = (int) (doneDamage * ((100 - this.armor) / 100)); 
             doneDamage =  doneDamage-armor;
-            if ((this.health - doneDamage) > 0) {
-                this.health -= doneDamage;
-            } 
+            this.health -= doneDamage;
+            if (health<0){
+                health=0;
+                this.state = State.die;
+            }
+
     }
 
     public void attack(Hero target) {

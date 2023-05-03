@@ -2,7 +2,7 @@ package Units;
 
 import java.util.ArrayList;
 
-public abstract class Infantry extends Hero{ // пехота
+public abstract class Infantry extends Hero{ 
     protected int tool; 
 
 

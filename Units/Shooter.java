@@ -3,7 +3,7 @@ package Units;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Shooter extends Hero { 
+public abstract class Shooter extends Hero { // стрелки
     protected int arrows;
     protected int maxArrows;
     protected int accuracy;
@@ -25,7 +25,7 @@ public abstract class Shooter extends Hero {
         if (health < 1 || arrows < 1) return;
         double min =Integer.MAX_VALUE;
 
-        int index_closedEnemy = 0;
+        int index_closedEnemy =0;
         for (int i = 0; i < enemyTeam.size(); i++) {
             double temp = this.coordinates.distanceSearch(enemyTeam.get(i).coordinates);
             if (temp<min){
@@ -44,5 +44,11 @@ public abstract class Shooter extends Hero {
             }
         }
 
+    }
+
+    @Override
+    public String getInfo() {
+        return String.format("%s  arr: %d ",
+                super.getInfo(), this.arrows);
     }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Bandit extends Infantry{
     protected int invisibility; 
-
     public Bandit(int x, int y, int init, ArrayList<Hero> team, String name, int health, int[] damage, int armor, int tool, int invisibility) {
         super(x, y, init,team, name, health, damage, armor, tool);
         this.invisibility = invisibility;
@@ -16,6 +15,6 @@ public class Bandit extends Infantry{
 
     @Override
     public String getInfo() {
-        return String.format("%s  invisibility: %d", super.getInfo(), this.invisibility);
+        return String.format("%s  inv: %d", super.getInfo(), this.invisibility);
     }
 }

@@ -3,7 +3,8 @@ package Units;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Magian extends Hero { 
+public abstract class Magian extends Hero {
+    
     protected int mana;
     protected int maxMana;
     protected int accuracy;
@@ -37,5 +38,11 @@ public abstract class Magian extends Hero {
         this.team.get(max_damaged).healed(Hp);
         this.mana -=Hp;
 
+    }
+
+    @Override
+    public String getInfo() {
+        return String.format("%s  ma: %d",
+                super.getInfo(), this.mana);
     }
 }
